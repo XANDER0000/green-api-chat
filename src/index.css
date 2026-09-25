@@ -1,0 +1,34 @@
+:root {
+  --text: #a8b5ad;
+  --heading: #edf5ef;
+  --muted: #91a098;
+  --bg: #0b100e;
+  --border: #26332d;
+  --input-border: #34433a;
+  --accent: #5bdb8b;
+  --sans: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  font: 16px/145% var(--sans);
+  letter-spacing: 0;
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 100svh;
+}
+
+body {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
