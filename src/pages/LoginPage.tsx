@@ -52,6 +52,7 @@ function LoginPage() {
                 onChange={(e) => setApiToken(e.target.value)}
               />
             </div>
+            
             {login.isError && (
               <div className="login-error">
                 {login.error.message.includes('403')
@@ -61,6 +62,7 @@ function LoginPage() {
                   : 'Ошибка подключения'}
               </div>
             )}
+
             <button className="login-submit" type="submit" disabled={login.isPending}>
               Войти в чат
             </button>
