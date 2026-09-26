@@ -3,9 +3,9 @@ export type Credentials = {
   apiToken: string,
 }
 
-export type Message = {
-  chatId: string,
-  message: string,
+export interface SendMessagePayload {
+  chatId: string
+  message: string
 }
 
 export interface Notification {

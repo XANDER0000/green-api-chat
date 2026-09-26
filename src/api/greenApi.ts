@@ -1,5 +1,5 @@
 import { baseUrl } from './client'
-import type { Credentials, Message, Notification, DeleteResult } from '../types/greenApi'
+import type { Credentials, SendMessagePayload, Notification, DeleteResult } from '../types/greenApi'
 
 // https://api.green-api.com/waInstance{idInstance}/getStateInstance/{apiToken}
 
@@ -8,7 +8,7 @@ export async function getStateInstance(credentials: Credentials): Promise<{ stat
   return response.data;
 }
 
-export async function sendMessage(credentials: Credentials, payload: Message): Promise<string> {
+export async function sendMessage(credentials: Credentials, payload: SendMessagePayload): Promise<{ idMessage: string }> {
   const response = await baseUrl.post(`/waInstance${credentials.idInstance}/sendMessage/${credentials.apiToken}`, payload);
   return response.data;
 }

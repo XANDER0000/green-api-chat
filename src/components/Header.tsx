@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { clearCredentials, getCredentials } from '../auth/authUtils'
+import { memo } from 'react'
 
 function Header() {
   const navigate = useNavigate()
@@ -25,4 +26,4 @@ function Header() {
   )
 }
 
-export default Header
+export default memo(Header)
