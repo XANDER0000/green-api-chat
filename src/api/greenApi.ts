@@ -3,7 +3,7 @@ import type { Credentials, Message, Notification, DeleteResult } from '../types/
 
 // https://api.green-api.com/waInstance{idInstance}/getStateInstance/{apiToken}
 
-export async function getStateInstance(credentials: Credentials): Promise<string> {
+export async function getStateInstance(credentials: Credentials): Promise<{ stateInstance: string }> {
   const response = await baseUrl.get(`/waInstance${credentials.idInstance}/getStateInstance/${credentials.apiToken}`);
   return response.data;
 }

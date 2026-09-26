@@ -1,21 +1,20 @@
 import { useState } from 'react'
-import { saveCredentials } from '../auth/authUtils'
+import { useLogin } from '../hooks/useLogin'
 
 function LoginPage() {
   const [idInstance, setidInstance] = useState('')
   const [apiToken, setApiToken] = useState('')
+  const login = useLogin()
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
 
     if (!idInstance.trim() || !apiToken.trim()) return
 
-    saveCredentials({
+    login.mutate({
       idInstance: idInstance.trim(),
       apiToken: apiToken.trim(),
     })
-
-    
   }
 
   return (
@@ -53,8 +52,16 @@ function LoginPage() {
                 onChange={(e) => setApiToken(e.target.value)}
               />
             </div>
-
-            <button className="login-submit" type="submit">
+            {login.isError && (
+              <div className="login-error">
+                {login.error.message.includes('403')
+                  ? 'Неверный ID инстанса или API Token'
+                  : login.error.message.includes('401')
+                  ? 'Неверный API Token'
+                  : 'Ошибка подключения'}
+              </div>
+            )}
+            <button className="login-submit" type="submit" disabled={login.isPending}>
               Войти в чат
             </button>
           </form>

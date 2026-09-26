@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const baseUrl = axios.create({
-  baseURL: "https://api.green-api.com",
+  baseURL: "/api",
   timeout: 5000,
 });
 
