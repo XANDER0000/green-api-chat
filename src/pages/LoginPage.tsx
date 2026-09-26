@@ -1,4 +1,23 @@
+import { useState } from 'react'
+import { saveCredentials } from '../auth/authUtils'
+
 function LoginPage() {
+  const [idInstance, setidInstance] = useState('')
+  const [apiToken, setApiToken] = useState('')
+
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+
+    if (!idInstance.trim() || !apiToken.trim()) return
+
+    saveCredentials({
+      idInstance: idInstance.trim(),
+      apiToken: apiToken.trim(),
+    })
+
+    
+  }
+
   return (
     <main className="login-page">
       <section className="login-shell" aria-labelledby="login-title">
@@ -10,7 +29,7 @@ function LoginPage() {
         <div className="login-card">
           <h1 id="login-title">Вход в чат</h1>
 
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit}>
             <div className="field">
               <label htmlFor="instance-id">ID инстанса</label>
               <input
@@ -18,6 +37,8 @@ function LoginPage() {
                 name="instance-id"
                 type="text"
                 placeholder="1101000000"
+                value={idInstance}
+                onChange={(e) => setidInstance(e.target.value)}
               />
             </div>
 
@@ -28,6 +49,8 @@ function LoginPage() {
                 name="api-token"
                 type="password"
                 placeholder="Введите токен"
+                value={apiToken}
+                onChange={(e) => setApiToken(e.target.value)}
               />
             </div>
 
