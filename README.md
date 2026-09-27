@@ -14,13 +14,13 @@ npm run dev
 ## 📸 Скриншоты
 
 ### Вход
-![Login](screenshots/page-login.png)
+![Login](./screenshots/page-login.jpg)
 
 ### Модалка
-![Chat List](screenshots/page-chat-modal.png)
+![Chat List](./screenshots/page-chat-modal.jpg)
 
 ### Переписка
-![Conversation](screenshots/page-chat-messages.png)
+![Conversation](./screenshots/page-chat-messages.jpg)
 
 ## ✨ Функционал
 
@@ -49,10 +49,7 @@ npm run dev
 Проверка авторизации происходит **до рендера** компонента через `authLoader`. Если credentials нет — `throw redirect('/login')`.
 
 ### Long polling для получения сообщений
-GREEN-API не поддерживает WebSocket. Сообщения приходят через `receiveNotification` с `receiveTimeout`. Используется **рекурсивный `setTimeout`** (не `setInterval`) — защита от наложения запросов.
-
-### Оптимистичное обновление
-Отправленные сообщения **сразу** попадают в UI через `onSuccess` в `useMutation` + `addMessage` в Zustand.
+ Сообщения приходят через `receiveNotification` с `receiveTimeout`. Используется **рекурсивный `setTimeout`** (не `setInterval`) — защита от наложения запросов.
 
 ### Дедупликация
 В `addMessage` проверка по `id` — защита от повторных уведомлений.
