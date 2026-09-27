@@ -15,9 +15,13 @@ export interface Notification {
 
 export interface NotificationBody {
   typeWebhook: string
+  timestamp: number,
+  idMessage: string,
   senderData: {
     chatId: string
     senderName?: string
+    chatName?: string 
+    senderPhoneNumber?: number
   }
   messageData?: {
     typeMessage: string

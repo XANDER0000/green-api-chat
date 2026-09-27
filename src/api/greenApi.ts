@@ -14,7 +14,7 @@ export async function sendMessage(credentials: Credentials, payload: SendMessage
 }
 
 export async function receiveNotification(credentials: Credentials): Promise<Notification | null> {
-  const response = await baseUrl.get(`/waInstance${credentials.idInstance}/receiveNotification/${credentials.apiToken}?receiveTimeout=7`);
+  const response = await baseUrl.get(`/waInstance${credentials.idInstance}/receiveNotification/${credentials.apiToken}?receiveTimeout=5`);
   return response.data;
 }
 
