@@ -21,4 +21,5 @@ export interface ChatState {
   setActiveChat: (chatId: string) => void
   addChat: (chat: Chat) => void
   removeChat: (chatId: string) => void 
+  updateChat: (chatId: string, data: Partial<Chat>) => void
 }

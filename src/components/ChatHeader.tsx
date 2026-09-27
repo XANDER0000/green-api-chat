@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { clearCredentials, getCredentials } from '../auth/authUtils'
 import { memo } from 'react'
 
-function Header() {
+function ChatHeader() {
   const navigate = useNavigate()
   const credentials = getCredentials()
 
@@ -26,4 +26,4 @@ function Header() {
   )
 }
 
-export default memo(Header)
+export default memo(ChatHeader)

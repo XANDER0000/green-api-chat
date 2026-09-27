@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# Green API Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-интерфейс для отправки и получения сообщений через [GREEN-API](https://green-api.com) (MAX/WhatsApp/Telegram).
 
-Currently, two official plugins are available:
+## 🚦 Запуск локально
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone <repo-url>
+cd green-api-chat
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## 📸 Скриншоты
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Вход
+![Login](./screenshots/page-login.jpg)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Модалка
+![Chat List](screenshots/page-chat-modal.jpg)
 
-```
+### Переписка
+![Conversation](./screenshots/page-chat-messages.jpg)
+
+## ✨ Функционал
+
+- Авторизация по `idInstance` + `apiToken` от GREEN-API
+- Добавление чатов по номеру телефона
+- Отправка текстовых сообщений
+- Получение входящих через long polling
+- Автоматическое создание чата при входящем от нового контакта
+- Отображение имени контакта
+
+## 🛠 Стек
+
+| Технология | Зачем |
+|------------|-------|
+| **React 19** + TypeScript | UI |
+| **Vite** | Сборка |
+| **React Router v7** | Роутинг + loaders (auth) |
+| **TanStack Query** | Мутации (sendMessage, getStateInstance) |
+| **Zustand** | Глобальный стейт (чаты, сообщения) |
+| **Axios** | HTTP-клиент с интерсепторами |
+| **Stylus** | Стили |
+
+## 🔑 Ключевые решения
+
+### Роутинг с защитой через loader
+Проверка авторизации происходит **до рендера** компонента через `authLoader`. Если credentials нет — `throw redirect('/login')`.
+
+### Long polling для получения сообщений
+ Сообщения приходят через `receiveNotification` с `receiveTimeout`. Используется **рекурсивный `setTimeout`** (не `setInterval`) — защита от наложения запросов.
+
+### Дедупликация
+В `addMessage` проверка по `id` — защита от повторных уведомлений.
+
+### CORS
+В dev используется **Vite Proxy** — запросы к GREEN-API идут через dev-сервер.
