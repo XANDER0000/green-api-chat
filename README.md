@@ -14,13 +14,13 @@ npm run dev
 ## 📸 Скриншоты
 
 ### Вход
-![Login](./screenshots/page-login.jpg)
+![Login](screenshots/page-login.jpg)
 
 ### Модалка
 ![Chat List](screenshots/page-chat-modal.jpg)
 
 ### Переписка
-![Conversation](./screenshots/page-chat-messages.jpg)
+![Conversation](screenshots/page-chat-messages.jpg)
 
 ## ✨ Функционал
 
